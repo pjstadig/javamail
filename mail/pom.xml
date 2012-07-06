@@ -51,7 +51,7 @@
 	<version>1.4.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.sun.mail</groupId>
+    <groupId>name.stadig.javamail</groupId>
     <artifactId>javax.mail</artifactId>
     <packaging>jar</packaging>
     <name>JavaMail API</name>
