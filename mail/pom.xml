@@ -53,6 +53,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>name.stadig.javamail</groupId>
     <artifactId>javax.mail</artifactId>
+    <version>1.4.5-p1</version>
     <packaging>jar</packaging>
     <name>JavaMail API</name>
 
