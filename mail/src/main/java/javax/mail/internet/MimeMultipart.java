@@ -468,6 +468,10 @@ public class MimeMultipart extends Multipart {
 	los.writeln(boundary + "--");
     }
 
+    private boolean getWithSystemDefault(Properties props, String name, boolean df) {
+        return PropUtil.getBooleanProperty(props, name, PropUtil.getBooleanSystemProperty(name, df));
+    }
+
     /**
      * Parse the InputStream from our DataSource, constructing the
      * appropriate MimeBodyParts.  The <code>parsed</code> flag is
@@ -482,22 +486,22 @@ public class MimeMultipart extends Multipart {
 	    return;
 
 	// read properties that control parsing
+        
+        Properties props = new MessageContext(this.parent).getSession().getProperties();
 
 	// default to true
-	ignoreMissingEndBoundary = PropUtil.getBooleanSystemProperty(
-	    "mail.mime.multipart.ignoremissingendboundary", true);
+	ignoreMissingEndBoundary = getWithSystemDefault(props,
+            "mail.mime.multipart.ignoremissingendboundary", true);
 	// default to true
-	ignoreMissingBoundaryParameter = PropUtil.getBooleanSystemProperty(
+	ignoreMissingBoundaryParameter = getWithSystemDefault(props,
 	    "mail.mime.multipart.ignoremissingboundaryparameter", true);
 	// default to false
-	ignoreExistingBoundaryParameter = PropUtil.getBooleanSystemProperty(
+	ignoreExistingBoundaryParameter = getWithSystemDefault(props,
 	    "mail.mime.multipart.ignoreexistingboundaryparameter", false);
 	// default to false
-	allowEmpty = PropUtil.getBooleanSystemProperty(
-	    "mail.mime.multipart.allowempty", false);
+	allowEmpty = getWithSystemDefault(props, "mail.mime.multipart.allowempty", false);
 	// default to true
-	bmparse = PropUtil.getBooleanSystemProperty(
-	    "mail.mime.multipart.bmparse", true);
+	bmparse = getWithSystemDefault(props, "mail.mime.multipart.bmparse", true);
 
 	if (bmparse) {
 	    parsebm();
